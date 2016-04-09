@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+from aktos_dcs import *
+import argparse
+import os
+
+parser = argparse.ArgumentParser(description='Get configuration values')
+parser.add_argument('-i', '--input-file', default=os.getcwd()+"/config.md", help='Input configuration file')
+parser.add_argument('-k', '--key', default=None, help='key or key tree')
+
+args = parser.parse_args()
+
+try:
+    config = AktosConfig(args.input_file)
+except:
+    print "Can not open file: ", args.input_file
+    exit(1)
+resp = config.get(args.key)
+if type(resp) == type({}):
+    for k, v in resp.iteritems():
+        print k, "\t", v
+
+else:
+    print resp
