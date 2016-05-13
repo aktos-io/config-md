@@ -22,4 +22,6 @@ if type(resp) == type({}):
         print k, "\t", v
 
 else:
+    if resp is None:
+        resp = "undefined" 
     print resp
